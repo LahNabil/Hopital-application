@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card mt-3">
+    <div class="card-header">
+<h1>Liste des patients</h1>
+</div>
+</div>
+<div class="card-body">
+<form method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-primary col-12">Ajouter Patient</button>
+</form>
+</div>
+
+{% endblock %}

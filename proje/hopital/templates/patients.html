@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card mt-3">
+  <div class="card-header">
+<h1>Liste des patients</h1>
+  <a href="{% url 'create_patient'%}" class="btn btn-primary">Ajouter</a>
+  </div>
+</div>
+<div class="card-body">
+
+<table class="table table-hover">
+  <thead>
+    <th>ID</th>
+    <th>Nom</th>
+    <th>Date de naissance</th>
+    <th>Malade</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    {% for patient in patients %}
+      <tr>
+        <td>{{patient.id}}</td>
+        <td>{{patient.nom}}</td>
+        <td>{{patient.date_Naissance}}</td>
+        <td>{% if patient.malade %}OUI {% else %} NON {%endif%}</td>
+        <td><a href="{% url 'delete_patient' patient.pk %}"class="btn btn-sm btn-danger" onclick="return confirm('Confirmation')">Delete</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+
+</table>
+  </div>
+{% endblock %}
