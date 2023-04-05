@@ -4,6 +4,10 @@
   <div class="card-header">
 <h1>Liste des patients</h1>
   <a href="{% url 'create_patient'%}" class="btn btn-primary">Ajouter</a>
+    <form class="d-flex" role="search" action="{%url 'search'  %}">
+      <input class="form-control me-2" type="search" placeholder="search" aria-label="Search" name="keyword">
+      <button class="btn btn-outline-success" type="submit">Recherche</button>
+    </form>
   </div>
 </div>
 <div class="card-body">
@@ -24,10 +28,22 @@
         <td>{{patient.date_Naissance}}</td>
         <td>{% if patient.malade %}OUI {% else %} NON {%endif%}</td>
         <td><a href="{% url 'delete_patient' patient.pk %}"class="btn btn-sm btn-danger" onclick="return confirm('Confirmation')">Delete</a></td>
+        <td><a href="{% url 'update_patient' patient.pk %}"class="btn btn-sm btn-success">Update</a></td>
       </tr>
     {% endfor %}
   </tbody>
 
 </table>
+  <div class="pagination">
+    {% for i in patients.paginator.page_range %}
+      {% if patients.number == i %}
+        <span class="btn btn-primary active">{{i}}
+        </span>
+      {% else %}
+        <a href="?page={{i}}"class="btn btn-outline-primary">{{i}}</a>
+      {% endif %}
+    {% endfor %}
+
+  </div>
   </div>
 {% endblock %}
